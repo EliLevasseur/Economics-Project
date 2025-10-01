@@ -268,20 +268,30 @@
     }
 
     .viz-bar-wrapper {
-      background: rgba(15, 36, 63, 0.08);
+      position: relative;
+      background: rgba(15, 36, 63, 0.12);
       border-radius: 999px;
       overflow: hidden;
-      height: clamp(12px, 1.8vh, 16px);
+      height: clamp(16px, 2vh, 18px);
+      border: 1px solid rgba(15, 36, 63, 0.18);
     }
 
     .viz-bar {
       height: 100%;
+      width: calc(var(--value, 0) * 1%);
       border-radius: inherit;
       background: linear-gradient(90deg, rgba(31, 107, 181, 0.9), rgba(12, 77, 139, 0.9));
+      box-shadow: 0 6px 12px rgba(9, 30, 66, 0.22);
     }
 
     .viz-bar.israel {
-      background: linear-gradient(90deg, rgba(244, 200, 76, 0.95), rgba(244, 200, 76, 0.75));
+      background: linear-gradient(90deg, rgba(244, 200, 76, 0.96), rgba(244, 200, 76, 0.78));
+      box-shadow: 0 8px 16px rgba(244, 200, 76, 0.35);
+    }
+
+    .viz-value {
+      font-weight: 600;
+      color: var(--blue-700);
     }
 
     .viz-note {
@@ -302,6 +312,21 @@
       padding-left: 1.2rem;
       display: grid;
       gap: 0.4rem;
+    }
+
+    .debate-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .debate-list li {
+      color: var(--text-secondary);
+    }
+
+    .debate-list strong {
+      color: var(--blue-700);
     }
 
     .card p {
@@ -484,7 +509,8 @@
     </section>
 
     <div class="cta-bar" role="group" aria-label="Additional resources">
-      <button class="cta-button" type="button" id="open-viz">📊 GDP Comparison</button>
+      <button class="cta-button" type="button" id="open-viz">💻 Digital Services</button>
+      <button class="cta-button" type="button" id="open-debate">💬 Debate Points</button>
       <button class="cta-button secondary" type="button" id="open-biblio">📚 View Bibliography</button>
     </div>
 
@@ -498,47 +524,52 @@
         <li id="fn5">Observatory of Economic Complexity. “Israel: Exports, Imports, and Trade Partners (2023).” 2024. https://oec.world/en/profile/country/isr.</li>
         <li id="fn6">Israel Water Authority. “Sea Water Desalination in Israel.” 2024. https://www.gov.il/en/departments/general/desalination.</li>
         <li id="fn7">Reuters. “Leviathan gas field to resume operations as Israel boosts exports.” 2025. https://www.reuters.com/world/middle-east/leviathan-gas-field-resume-operations-2025-03-15/.</li>
-      <li id="fn8">Stockholm International Peace Research Institute (SIPRI). “Unprecedented rise in global military expenditure continues in 2024.” 2025. https://www.sipri.org/media/press-release/2025/unprecedented-rise-global-military-expenditure-continues-2024.</li>
+        <li id="fn8">Stockholm International Peace Research Institute (SIPRI). “Unprecedented rise in global military expenditure continues in 2024.” 2025. https://www.sipri.org/media/press-release/2025/unprecedented-rise-global-military-expenditure-continues-2024.</li>
+        <li id="fn9">World Intellectual Property Organization (WIPO). “Global Innovation Index 2024: Country Profiles – Israel; United Arab Emirates.” 2024. https://www.wipo.int/global-innovation-index.</li>
+        <li id="fn10">Organisation for Economic Co-operation and Development (OECD). “Main Science and Technology Indicators 2024/1: Gross domestic spending on R&amp;D, percentage of GDP.” 2024. https://stats.oecd.org/Index.aspx?DataSetCode=MSTI_PUB.</li>
+        <li id="fn11">World Bank. “ICT service exports (current US$) – Israel, United Arab Emirates.” 2024. https://data.worldbank.org/indicator/BX.GSR.CCIS.CD.</li>
+        <li id="fn12">International Monetary Fund (IMF). “World Economic Outlook Database, April 2025: GDP per capita, current prices – Selected economies.” 2025. https://www.imf.org/en/Publications/WEO.</li>
       </ol>
     </footer>
   </main>
 
   <dialog id="viz-dialog" aria-labelledby="viz-title">
     <div class="dialog__header">
-      <h2 class="dialog__title" id="viz-title">Nominal GDP Comparison (2025, USD trillions)</h2>
+      <h2 class="dialog__title" id="viz-title">Digital Services Revenue (2024, USD billions)</h2>
       <button class="dialog__close" type="button" data-close="viz-dialog">Close</button>
     </div>
-    <div class="viz-chart" role="img" aria-label="Bar chart comparing nominal GDP levels for select countries in 2025">
-      <div class="viz-row">
-        <span class="viz-label">United States</span>
-        <div class="viz-bar-wrapper" aria-hidden="true">
-          <div class="viz-bar" style="width:100%"></div>
-        </div>
-        <span>29.3</span>
-      </div>
-      <div class="viz-row">
-        <span class="viz-label">China</span>
-        <div class="viz-bar-wrapper" aria-hidden="true">
-          <div class="viz-bar" style="width:63%"></div>
-        </div>
-        <span>18.5</span>
-      </div>
-      <div class="viz-row">
-        <span class="viz-label">Germany</span>
-        <div class="viz-bar-wrapper" aria-hidden="true">
-          <div class="viz-bar" style="width:16%"></div>
-        </div>
-        <span>4.6</span>
-      </div>
+    <div class="viz-chart" role="img" aria-label="Horizontal bar chart comparing 2024 digital services revenue for Israel and the United Arab Emirates">
       <div class="viz-row">
         <span class="viz-label">Israel</span>
-        <div class="viz-bar-wrapper" aria-hidden="true">
-          <div class="viz-bar israel" style="width:2%"></div>
+        <div class="viz-bar-wrapper" style="--value:100">
+          <div class="viz-bar israel"></div>
         </div>
-        <span>0.58</span>
+        <span class="viz-value">US$27B</span>
+      </div>
+      <div class="viz-row">
+        <span class="viz-label">United Arab Emirates</span>
+        <div class="viz-bar-wrapper" style="--value:48">
+          <div class="viz-bar"></div>
+        </div>
+        <span class="viz-value">US$13B</span>
       </div>
     </div>
-    <p class="viz-note">Values reflect IMF World Economic Outlook April 2025 nominal GDP (USD trillions).</p>
+    <p class="viz-note">Figures use World Bank ICT service exports (current US$) as a data for graphing isreals and the UAE's digital services profits. Latest available data is 2023 are used as the 2024 dataset until further data is provided.</p>
+  </dialog>
+
+  <dialog id="debate-dialog" aria-labelledby="debate-dialog-title">
+    <div class="dialog__header">
+      <h2 class="dialog__title" id="debate-dialog-title">Debate Points</h2>
+      <button class="dialog__close" type="button" data-close="debate-dialog">Close</button>
+    </div>
+    <div class="dialog__content">
+      <p>Use these data-backed points to explain why Israel’s economy proves to be better than the United Arab Emirates.</p>
+      <ul class="debate-list">
+        <li><strong>Innovation leadership:</strong> Israel ranks 3rd globally in the 2024 Global Innovation Index, far ahead of the UAE at 32nd, showing much better innovation.</li>
+        <li><strong>Research intensity:</strong> Israel invests about 5.6% of GDP in research and development which is the highest share worldwide while the UAE only invests roughly 1.3%, this limits the quantity of its own national discoveries.</li>
+        <li><strong>Digital exports edge:</strong> Despite the UAE’s Gulf reputation for digital services, Israel sold roughly $27 billion in ICT service exports in 2022, more than double the UAE’s $13 billion haul.</li>
+      </ul>
+    </div>
   </dialog>
 
   <dialog id="bibliography-dialog" aria-labelledby="bibliography-dialog-title">
@@ -547,7 +578,7 @@
       <button class="dialog__close" type="button" data-close="bibliography-dialog">Close</button>
     </div>
     <div class="dialog__content">
-      <p>Sources supporting the Israel Economy snapshot and accompanying visualization:</p>
+      <p>Sources supporting the Israel Economy snapshot:</p>
       <ol>
         <li>International Monetary Fund (IMF). “World Economic Outlook Database, April 2025: Israel — GDP, current prices.” 2025. https://www.imf.org/en/Publications/WEO.</li>
         <li>World Bank. “GDP (current US$) – Israel.” 2024. https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=IL&name_desc=true</li>
@@ -557,6 +588,10 @@
         <li>Israel Water Authority. “Sea Water Desalination in Israel.” 2024. https://www.gov.il/en/departments/general/desalination.</li>
         <li>Reuters. “Leviathan gas field to resume operations as Israel boosts exports.” 2025. https://www.reuters.com/world/middle-east/leviathan-gas-field-resume-operations-2025-03-15/.</li>
         <li>Stockholm International Peace Research Institute (SIPRI). “Unprecedented rise in global military expenditure continues in 2024.” 2025. https://www.sipri.org/media/press-release/2025/unprecedented-rise-global-military-expenditure-continues-2024.</li>
+        <li>World Intellectual Property Organization (WIPO). “Global Innovation Index 2024: Country Profiles – Israel; United Arab Emirates.” 2024. https://www.wipo.int/global-innovation-index.</li>
+        <li>Organisation for Economic Co-operation and Development (OECD). “Main Science and Technology Indicators 2024/1: Gross domestic spending on R&amp;D, percentage of GDP.” 2024. https://stats.oecd.org/Index.aspx?DataSetCode=MSTI_PUB.</li>
+        <li>World Bank. “ICT service exports (current US$) – Israel, United Arab Emirates.” 2024. https://data.worldbank.org/indicator/BX.GSR.CCIS.CD.</li>
+        <li>International Monetary Fund (IMF). “World Economic Outlook Database, April 2025: GDP per capita, current prices – Selected economies.” 2025. https://www.imf.org/en/Publications/WEO.</li>
       </ol>
     </div>
   </dialog>
@@ -565,8 +600,10 @@
     (function () {
       const vizDialog = document.getElementById('viz-dialog');
       const bibliographyDialog = document.getElementById('bibliography-dialog');
+      const debateDialog = document.getElementById('debate-dialog');
       const openVizButton = document.getElementById('open-viz');
       const openBibliographyButton = document.getElementById('open-biblio');
+      const openDebateButton = document.getElementById('open-debate');
 
       const openDialog = (dialog) => {
         if (!dialog.open) {
@@ -581,6 +618,7 @@
       };
 
       openVizButton.addEventListener('click', () => openDialog(vizDialog));
+      openDebateButton.addEventListener('click', () => openDialog(debateDialog));
       openBibliographyButton.addEventListener('click', () => openDialog(bibliographyDialog));
 
       document.querySelectorAll('.dialog__close').forEach((button) => {
@@ -593,10 +631,11 @@
         });
       });
 
-      [vizDialog, bibliographyDialog].forEach((dialog) => {
+      [vizDialog, debateDialog, bibliographyDialog].forEach((dialog) => {
         dialog.addEventListener('cancel', () => closeDialog(dialog));
       });
     }());
   </script>
 </body>
 </html>
+
